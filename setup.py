@@ -10,7 +10,7 @@ version_file = 'whiptail.py'
 version = 1.0
 
 setup(
-    name='whiptail',
+    name='whiptailPy',
     version=version,
     description="Use whiptail to display dialog boxes from shell scripts",
     long_description=readme + '\n\n' + changes,
