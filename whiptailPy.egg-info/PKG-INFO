@@ -1,0 +1,15 @@
+Metadata-Version: 1.1
+Name: whiptailPy
+Version: 1.0
+Summary: Use whiptail to display dialog boxes from shell scripts
+Home-page: https://github.com/fillips/whiptail
+Author: filips
+Author-email: filip.stamcar@hotmail.com
+License: UNKNOWN
+Description: Use whiptail to display dialog boxes from shell scripts
+        
+        
+Keywords: whiptail
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Programming Language :: Python

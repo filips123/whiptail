@@ -1,0 +1,7 @@
+README.rst
+setup.py
+whiptailPy.py
+whiptailPy.egg-info/PKG-INFO
+whiptailPy.egg-info/SOURCES.txt
+whiptailPy.egg-info/dependency_links.txt
+whiptailPy.egg-info/top_level.txt
