@@ -1,7 +1,3 @@
-# whiptail.py - Use whiptail to display dialog boxes from shell scripts
-# Copyright (C) 2013 Marwan Alsabbagh
-# license: BSD, see LICENSE for more details.
-
 from __future__ import print_function
 import sys
 import shlex
@@ -34,30 +30,32 @@ class Whiptail(object):
             '--' + control, msg, str(self.height), str(self.width)
         ]
         cmd += list(extra)
-        p = Popen(cmd, stderr=PIPE)
+        p = Popen(cmd)
         out, err = p.communicate()
         if self.auto_exit and p.returncode in exit_on:
             print('User cancelled operation.')
             sys.exit(p.returncode)
         return Response(p.returncode, err)
 
+    def calc_height(self, msg):
+        height_offset = 8 if msg else 7
+        return [str(self.height - height_offset)]
+ 
+    def showlist(self, control, msg, items, prefix):
+        if isinstance(items[0], string_types):
+            items = [(i, '', 'OFF') for i in items]
+        else:
+            items = [(k, prefix + v, s) for k, v, s in items]
+        extra = self.calc_height(msg) + flatten(items)
+        return shlex.split(self.run(control, msg, extra).value)
+        
     def prompt(self, msg, default='', password=False):
         control = 'passwordbox' if password else 'inputbox'
         return self.run(control, msg, [default]).value
 
-    def confirm(self, msg, default='yes'):
+    def confirm(self, msg, default='yes', yes='yes', no='no'):
         defaultno = '--defaultno' if default == 'no' else ''
-        return self.run('yesno', msg, [defaultno], [255]).returncode == 0
-
-    def alert(self, msg):
-        self.run('msgbox', msg)
-
-    def view_file(self, path):
-        self.run('textbox', path, ['--scrolltext'])
-
-    def calc_height(self, msg):
-        height_offset = 8 if msg else 7
-        return [str(self.height - height_offset)]
+        return self.run('yesno', msg, [defaultno, '--yes-button', yes, '--no-button', no], [255]).returncode == 0
 
     def menu(self, msg='', items=(), prefix=' - '):
         if isinstance(items[0], string_types):
@@ -66,15 +64,13 @@ class Whiptail(object):
             items = [(k, prefix + v) for k, v in items]
         extra = self.calc_height(msg) + flatten(items)
         return self.run('menu', msg, extra).value
+        
+    def alert(self, msg):
+        self.run('msgbox', msg)
 
-    def showlist(self, control, msg, items, prefix):
-        if isinstance(items[0], string_types):
-            items = [(i, '', 'OFF') for i in items]
-        else:
-            items = [(k, prefix + v, s) for k, v, s in items]
-        extra = self.calc_height(msg) + flatten(items)
-        return shlex.split(self.run(control, msg, extra).value)
-
+    def view_file(self, path):
+        self.run('textbox', path, ['--scrolltext'])
+        
     def radiolist(self, msg='', items=(), prefix=' - '):
         return self.showlist('radiolist', msg, items, prefix)
 
