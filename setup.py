@@ -2,7 +2,7 @@ import os
 from setuptools import setup
 
 def read(fname):
-return open(os.path.join(os.path.dirname(__file__), fname)).read()
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 readme = read('README.rst')
 changes = read('CHANGES.txt')
