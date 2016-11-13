@@ -5,7 +5,7 @@ import itertools
 from subprocess import Popen, PIPE
 from collections import namedtuple
 
-__version__ = '0.3.dev'
+__version__ = '1.0'
 PY3 = sys.version_info[0] == 3
 string_types = str if PY3 else basestring
 Response = namedtuple('Response', 'returncode value')
