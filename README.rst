@@ -6,7 +6,7 @@ Use whiptail to display dialog boxes from shell scripts.
 Installation
 ------------
 
-  $ pip install whiptail
+  $ pip install whiptailPy
 
 Links
 -----
