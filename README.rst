@@ -11,5 +11,5 @@ Installation
 Links
 -----
 
-* `Fork me on GitHub <https://github.com/fillips/whiptail>`_
+* `Fork me on GitHub <https://github.com/filips123/whiptail>`_
 
